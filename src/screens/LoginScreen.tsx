@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'; // Correct Import
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-// Import the route types from App.tsx
+// Define the type for your stack routes
 type RootStackParamList = {
   Login: undefined;
-  Home: undefined;
+  Home: { email: string };  // Pass email to HomeScreen
 };
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [showPassword, setShowPassword] = useState<boolean>(false); // Toggle state for showing password
+  const [email, setEmail] = useState<string>('');  // Email state
+  const [password, setPassword] = useState<string>('');  // Password state
+  const [showPassword, setShowPassword] = useState<boolean>(false);  // Show password state
 
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>(); // Type navigation
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const handleLogin = () => {
     if (!email || !password) {
       Alert.alert('Error', 'Please enter both email and password');
       return;
     }
-    
-    // For now, just navigate to HomeScreen (no real auth yet)
-    navigation.navigate('Home');  // Correct typing here
+
+    // Navigate to HomeScreen and pass the email
+    navigation.navigate('Home', { email });
   };
 
   return (
@@ -62,7 +62,7 @@ const LoginScreen = () => {
           onPress={() => setShowPassword(!showPassword)}  // Toggle password visibility
         >
           <MaterialIcons
-            name={showPassword ? 'visibility' : 'visibility-off'}  // Change icon based on visibility state
+            name={showPassword ? 'visibility' : 'visibility-off'}
             size={24}
             color="gray"
           />
