@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'; // Correct Import
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+// Import the route types from App.tsx
+type RootStackParamList = {
+  Login: undefined;
+  Home: undefined;
+};
 
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false); // Toggle state for showing password
 
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>(); // Type navigation
+
   const handleLogin = () => {
     if (!email || !password) {
       Alert.alert('Error', 'Please enter both email and password');
       return;
     }
-    Alert.alert('Logged In', `Email: ${email}\nPassword: ${password}`);
+    
+    // For now, just navigate to HomeScreen (no real auth yet)
+    navigation.navigate('Home');  // Correct typing here
   };
 
   return (
@@ -58,7 +70,10 @@ const LoginScreen = () => {
       </View>
 
       {/* Login Button */}
-      <Button title="Login" onPress={handleLogin} />
+      <Button
+       title="Login"
+       onPress={handleLogin} 
+      />
     </View>
   );
 };
@@ -83,7 +98,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     paddingHorizontal: 10,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   passwordContainer: {
     width: '100%',
@@ -91,7 +106,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5,
+    borderRadius: 10,
     marginBottom: 20,
   },
   inputPassword: {
