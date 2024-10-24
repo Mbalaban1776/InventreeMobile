@@ -134,7 +134,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   buttonWrapper: {
-    marginVertical: 10,  // Add margin to buttons
+    marginVertical: 10, 
+    borderRadius:20,
     width: '100%',
   },
   text: {
