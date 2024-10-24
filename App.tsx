@@ -25,12 +25,12 @@ const App = () => {
         <Stack.Screen 
           name="Login" 
           component={LoginScreen}
-          options={{ headerShown: true }}  // Hides the header for Login
+          options={{ headerShown: false }}  // Hides the header for Login
         />
         <Stack.Screen 
           name="Home" 
           component={HomeScreen} 
-          options={{ headerShown: true }}  // Hides the header for Home (optional)
+          options={{ headerShown: false }}  // Hides the header for Home (optional)
         />
         <Stack.Screen 
           name="YöneticiPaneli" 
